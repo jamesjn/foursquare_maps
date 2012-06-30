@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html lang="en" class="modernBrowser"> <!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  	<title>FourSquared</title>
+
+    <style id="dynaJsStyle"></style>
+    
+    <!-- Mobile viewport optimization http://goo.gl/b9SaQ -->
+   	<meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480"/>
+    <meta content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' name='viewport' />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel=apple-touch-icon href="/img/iphone.png" />
+    <link rel="stylesheet" href="flat/css/main.css" />
+    <link rel='stylesheet' media="screen and (min-width: 720px)" href="flat/css/lgScreen.css" />
+    <link rel="stylesheet" ="flat/libraries/leaflet/leaflet.css" />
+    
+    <script src="flat/js/headJs.js"></script>
+
+	<link rel="stylesheet" href="flat/libraries/leaflet/leaflet.css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
+</head>
+<body>
+	<div class="dPopMask" style="display:none;"></div>
+    <div id="overlayRelativer">
+    	<div id="dPopWin" class="welcomePop bringDPopUpIn" style="display:none;">
+        	<!--placeholder-->
+        </div>
+    </div>
+
+    <div id="wrapper">
+		<div id="headFixWrapper">
+			<div id="headWrapper">
+				<div class="sectionPad">
+					<span id="logo">appLogo</span>
+				</div>
+			</div>
+		</div>
+		<div id="contentWrap">
+			<div id="jsAnimWrap">
+				
+			</div>
+		</div>
+        <div id="map"></div>
+	</div>
+
+	
+<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src=/flat/js/jq1.7.2.js"><\/script>')</script> 
+
+	
+	
+
+	<script src="flat/js/footJs.js"></script>
+    <script src="flat/libraries/leaflet/leaflet.js"></script>
+    <script src="flat/js/map.js"></script>
+    <script src="flat/js/fsqdata.js"></script>
+    
+    
+    
+    
+	
+    
+</body>
+</html>
