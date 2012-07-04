@@ -7,11 +7,16 @@ function getFSQData(){
 
 $.when(getFSQData()).then(function(data){
 	//console.log(data.responseText);
-	if('error' in data ||
-	   'meta' in data && 'errorType' in data.meta){
-		   window.location = 'login';
+	if('meta' in data && 'errorType' in data.meta && data.meta.errorType === "server_error"){
+		dPop.create(data.meta.errorDetail,{css:'popWarn'});
 	}else {
-	    mapData.genMarkers(data);
+		if('error' in data ||
+		   'meta' in data && 'errorType' in data.meta){
+			   window.location = 'login';
+		}else {
+			mapData.genMarkers(data);
+		}
 	}
 }); 
 
+var filterList = '';

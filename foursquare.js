@@ -32,14 +32,20 @@ https_app.listen(443);
 
 var qs = require('querystring');
 
-https_app.post('/foursquare/push', function(req, res) {
-  var data = '';
-  req.on('data', function(d){
-    data = data + d;
-  });
-  req.on('end', function(){
-    //console.log(unescape(qs.parse(data).checkin));
-    res.send("ok");
+var io = require('socket.io').listen(8010); 
+io.sockets.on('connection', function(socket) {
+
+  https_app.post('/foursquare/push', function(req, res) {
+    var data = '';
+    req.on('data', function(d){
+      data = data + d;
+    });
+    req.on('end', function(){
+      console.log(unescape(qs.parse(data).checkin));
+      map_update = JSON.parse((unescape(qs.parse(data).checkin)));
+      socket.emit('map_update', map_update);
+      res.send("ok");
+    });
   });
 });
 
@@ -48,7 +54,7 @@ var Foursquare = require("node-foursquare-2")(config);
 
 var access_token;
 
-app.listen(8010);
+app.listen(8080);
 
 app.get('/foursquare/login', function(req, res) {
   //req.session.name = req.params.access_token;
@@ -58,7 +64,7 @@ app.get('/foursquare/login', function(req, res) {
 
 app.get('/foursquare/callback', function(req, res) {
   var code = req.query["code"];
-  https.get({host: 'foursquare.com', path: '/oauth2/access_token?client_id=' + config.secrets.clientId + '&client_secret=' + config.secrets.clientSecret + '&grant_type=authorization_code&redirect_uri=http://www.jamesjn.com:8010/foursquare/callback&code='+code}, function(client_res){
+  https.get({host: 'foursquare.com', path: '/oauth2/access_token?client_id=' + config.secrets.clientId + '&client_secret=' + config.secrets.clientSecret + '&grant_type=authorization_code&redirect_uri=http://www.jamesjn.com:8080/foursquare/callback&code='+code}, function(client_res){
     client_res.on('data', function(d){
       access_token = JSON.parse(d).access_token;
       req.session.access_token = access_token;
@@ -150,5 +156,6 @@ app.get('/libraries/jquery.min.js', function(req, res) {
 app.get('/libraries/jquery.ba-bbq.js', function(req, res) {
   res.sendfile(__dirname + '/libraries/jquery.ba-bbq.js');  
 });
+
 
 

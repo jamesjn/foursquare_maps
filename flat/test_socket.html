@@ -1,0 +1,10 @@
+<html>
+<script src="http://jamesjn.com:8010/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://jamesjn.com:8010');
+  socket.on('map_update', function (data) {
+    alert(data);
+    console.log(data);
+  });
+</script>
+</html>

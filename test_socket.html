@@ -1,0 +1,9 @@
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://jamesjn.com');
+  socket.on('map_update', function (data) {
+    console.log(data);
+  });
+</script>
+</html>

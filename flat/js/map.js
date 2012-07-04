@@ -67,7 +67,7 @@ var cloudmadeUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D7597
 	cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
 	cloudmade = new L.TileLayer(cloudmadeUrl, {maxZoom: 18, attribution: cloudmadeAttribution});
 
-map.setView(new L.LatLng(40.7619, -73.9763), 16).addLayer(cloudmade);
+map.setView(new L.LatLng(40.72612450121212, 73.99640369242422), 16).addLayer(cloudmade);
 
 
 var markerLocation = new L.LatLng(51.5, -0.09),
@@ -80,7 +80,7 @@ function genMap(lat,lon){//Set after localization
 	var center = new L.LatLng(lat,lon); // geographical point (longitude and latitude)
 	
 	map.setView(center, 16);
-	mapLoc.setAtMe(lat,lon,true);
+	mapLoc.setAtMe(lat,lon,false);
 }
 
 mapLoc.locate(genMap);
@@ -119,34 +119,34 @@ function onMapClick(e) {
 
 
 function markerEventer(marker,site){
-
+	var catImg = site.venue.categories[0].icon.prefix+'32.png',
+		venue = site.venue,
+		loc = venue.location;
+		
 	marker.on('click', function(e) { 
-		var venue = site.venue,
-			loc = venue.location;
-		var tpl = '<h1>'+venue.name+'</h1><p>Address: '+loc.address+'</p>';
+		var tpl = '<h1><img src="'+catImg+'" />'+venue.name+'</h1><p>Address: '+loc.address+'</p>';
 		dPop.create(tpl,{
 			noMask : true,
 			css : 'eventPop'	
 		});
 	});
 
-	/*if( !("ontouchstart" in document.documentElement )){
+	if( !("ontouchstart" in document.documentElement )){
 		marker.on('mouseover', function(e) {
 			//if(typeof mapMarkPop != "undefined"){clearTimeout(mapMarkPop);}
-			var tpl = '<img src="img/categories/small/'+dItem['category']+'.png" alt="'+dItem['category']+'" />\
-				<h3>'+dItem['title']+'</h3>\
-				<span class="priceNTime"><label>From: </label>'+dItem['start']+'<br /><label>Until: </label>'+dItem['end']+'<strong>$'+dItem['cost']+'</strong></span>';
+			var tpl = '\
+				<h3>'+venue.name+'</h3>';
 				this.bindPopup(tpl).openPopup();
 		});
 		
-		marker.on('mouseout', function(e) {
+		/*marker.on('mouseout', function(e) {
 			myObj = this;
 			//var mapMarkPop = setTimeout(function(){
 				myObj.closePopup();
 			//},300);
 			
-		});
-	}*/
+		});*/
+	}
 }
 		    
 var mapData = {
@@ -163,6 +163,8 @@ var mapData = {
 					loc = site.venue.location,
 					catImg = site.venue.categories[0].icon.prefix+'32.png';
 				
+				var catName = site.venue.categories[0].shortName,
+					catName = catName.replace(' ','_');
 				var markerLoc = new L.LatLng(parseFloat(loc.lat),parseFloat(loc.lng));
 						
 						
@@ -183,12 +185,19 @@ var mapData = {
 				markerEventer(marker,site);
 				
 				//Generate layers
-				if(typeof mapData.layers['mySite'] != "object")mapData.layers['mySite'] = new L.LayerGroup();
-				mapData.layers['mySite'].addLayer(marker);
+				if(typeof mapData.layers[catName] != "object"){
+					mapData.layers[catName] = new L.LayerGroup();
+					
+				}
+				mapData.layers[catName].addLayer(marker);
 				
-				map.addLayer(mapData.layers['mySite']);
+				
 		
 			}
+			for(var key in mapData.layers){
+				map.addLayer(mapData.layers[key]);
+			}
+			
 		}
 	}
 }
@@ -197,9 +206,7 @@ var mapData = {
 
 
 
-
-
-
+function initTouchHandler(){
 	var is3dSupporting = deviceType.is3dSupporting;
 	
 	var diffInCoord,
@@ -260,7 +267,7 @@ var mapData = {
 		}
 		if(is3dSupporting)this.style.webkitTransform = 'translate3D('+moveMe+'px, 0px, 0px) rotateZ(0deg)';	
 			else this.style.webkitTransform = 'translateX('+moveMe+'px)';		
-	});		
-		
-
+	});				
+}
+initTouchHandler();
 

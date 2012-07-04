@@ -20,9 +20,10 @@
 	<link rel=apple-touch-icon href="/img/iphone.png" />
     <link rel="stylesheet" href="flat/css/main.css" />
     <link rel='stylesheet' media="screen and (min-width: 720px)" href="flat/css/lgScreen.css" />
-    <link rel="stylesheet" ="flat/libraries/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="flat/libraries/leaflet/leaflet.css" />
     
     <script src="flat/js/headJs.js"></script>
+    <script src="http://jamesjn.com/socket.io/socket.io.js"></script>
 
 	<link rel="stylesheet" href="flat/libraries/leaflet/leaflet.css" />
 	<!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
@@ -34,6 +35,7 @@
         	<!--placeholder-->
         </div>
     </div>
+
 
     <div id="wrapper">
 		<div id="headFixWrapper">
@@ -65,8 +67,16 @@
     <script src="flat/js/fsqdata.js"></script>
     
     
-    
-    
+
+
+<script>
+  var socket = io.connect('http://jamesjn.com:80');
+  socket.on('map_update', function (data) {
+    console.log(data);
+	
+  });
+</script>
+
 	
     
 </body>

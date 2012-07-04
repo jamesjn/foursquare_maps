@@ -139,16 +139,27 @@ body,
 .dPopSpacer {
 	padding:15px;}
 	
+.popWarn {
+	color:#444 !important;
+	background:yellow !important;width:80%;}
+	
 .eventPop {
 	width:97%;
-	text-align:center;
-	padding:25px 0;
+	text-align:left;
+	padding:10px 0;
 	color:#555;
 	top:10px;}	
 	
 .eventPop h1 {
-	font-size:14px;
-	margin-bottom:15px;}
+	font-size:17px;
+	margin-bottom:15px;
+	color:#319eb5;}
+	
+.eventPop h1 img {
+	position:relative;
+	top:7px;
+	background:#319eb5;padding:2px;
+	margin-right:7px;}
 	
 .eventPop #dPopLogoWrap {
 	padding:5px;
@@ -168,6 +179,9 @@ body,
 .leaflet-left {
 	left:inherit !important;
 	right:0;}
+	
+.leaflet-top .leaflet-control {margin-top:120px !important;}
 
 .leaflet-marker-icon {
 	background:#319eb5;padding:3px;border-radius:2px;box-shadow:1px 1px 2px rgba(0,0,0,.35);}
+	

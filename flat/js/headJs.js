@@ -165,7 +165,7 @@ var dHeight = {
 function updateViewPort(){
 	setTimeout(function(){
 			dHeight.get(); //Update view
-			document.body.setAttribute('style','min-height:'+dHeight.view+'px !important');
+			//document.body.setAttribute('style','min-height:'+dHeight.view+'px !important');
 			var cssTpl = '\
 				.dPopMask,html,body,.wrapper,#map {width:100%; height:'+dHeight.view+'px !important;}';
 			//appendCss(cssTpl);
