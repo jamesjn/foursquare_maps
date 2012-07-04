@@ -1,0 +1,5 @@
+Node.js app to authenticate and retrieve Foursquare data
+
+Uses Redis for session data.  Socket.io for pushing real-time foursquare api data.  Leaflet Javascript library for maps.
+
+Developed during Meetup.com's Javascript Battle of the Braces.
